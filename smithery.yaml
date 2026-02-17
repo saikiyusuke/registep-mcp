@@ -1,0 +1,68 @@
+name: registep-mcp
+displayName: Registep MCP
+description: AI-powered POS & sales analytics MCP server. Integrates with Airレジ, スマレジ, and BASE EC with 67 tools for sales data, store management, AI chat analysis, and more.
+version: "1.0.2"
+homepage: https://registep.jp
+repository: https://github.com/saikiyusuke/registep-mcp
+license: MIT
+author: ASI Productions
+
+categories:
+  - analytics
+  - data
+  - ecommerce
+
+tags:
+  - pos
+  - sales
+  - japan
+  - airregi
+  - smaregi
+  - base-ec
+  - analytics
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - apiToken
+    properties:
+      apiToken:
+        type: string
+        description: Registep API token. Get yours at https://registep.jp/developers/
+        default: ""
+  commandFunction: |-
+    (config) => ({
+      command: "npx",
+      args: ["@registep/mcp"],
+      env: {
+        REGISTEP_API_TOKEN: config.apiToken
+      }
+    })
+
+tools:
+  - name: get_sales_data
+    description: Fetch sales data for a store with optional date filters
+  - name: get_stores
+    description: List all stores for the authenticated user
+  - name: create_store
+    description: Create a new store
+  - name: update_store
+    description: Update store information
+  - name: get_airregi_data
+    description: Fetch Airレジ POS sales data
+  - name: get_smaregi_data
+    description: Fetch スマレジ POS sales data
+  - name: get_base_products
+    description: List BASE EC products
+  - name: get_base_orders
+    description: List BASE EC orders
+  - name: ai_chat
+    description: Natural language AI analysis of sales data
+  - name: get_weather_correlation
+    description: Analyze correlation between weather and sales
+  - name: export_csv
+    description: Export sales data as CSV
+  - name: import_csv
+    description: Import sales data from CSV
